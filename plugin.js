@@ -1,5 +1,5 @@
 /*! 
- * zzSLider v0.1 by Zzbaivong <devs.forumvi.com>
+ * zzSLider v0.2 by Zzbaivong <devs.forumvi.com>
  *
  * Forked from Jlider v1.0 by Juskteez (vhuyphong@gmail.com)
  */
@@ -41,6 +41,7 @@
             var $wrap = createDiv("wrap", ""); // Khung bao bên ngoài
             var $control = createDiv("control", ""); // Tạo hộp điều khiển
             var $play = createDiv("play", "Pause"); // Nút play
+            var $full = createDiv("full", "Fullscreen"); // Nút fullscreen
             var $next = createDiv("next", "Next"); // Nút next
             var $prev = createDiv("prev", "Prev"); // nút Prev
             var $paging = createDiv("paging", ""); // Hộp số thứ tự
@@ -58,7 +59,7 @@
                 minHeight: settings.minHeight
             });
 
-            $play.add($next).add($prev).add($paging).appendTo($control); // Thêm nút chức năng vào hộp điều khiển
+            $play.add($full).add($next).add($prev).add($paging).appendTo($control); // Thêm nút chức năng vào hộp điều khiển
             $control.add($progress).insertBefore($obj); // Chèn hộp điều khiển và Thanh trạng thái vào sau slide
 
             var $item = $("li", $obj);
@@ -99,11 +100,13 @@
 
             var translate = function(next) {
                 var setClass = settings.effect;
-                if (setClass == "random") {
-                    // $obj.removeClass("zzfade zzleft zzright zztop zzbottom zzscaleIn zzscaleOut zzskewXY zzskewYX zzrotateX zzrotateY zzrotateXY zzrotateYX");
-                    var arr = "fade|left|right|top|bottom|scaleIn|scaleOut|skewXY|skewYX|rotateX|rotateY|rotateXY|rotateYX".split("|");
-                    $obj.removeClass("zz" + arr.join(" zz"));
-                    setClass = arr[Math.floor(Math.random() * arr.length)];
+                var listClass = "fade|left|right|top|bottom|scaleIn|scaleOut|skewXY|skewYX|rotateX|rotateY|rotateXY|rotateYX".split("|");
+                $obj.removeClass("zz" + listClass.join(" zz"));
+                if (setClass == "random" || $.type(setClass) == "array") {
+                    if (setClass == "random") {
+                        setClass = listClass;
+                    }
+                    setClass = setClass[Math.floor(Math.random() * setClass.length)];
                 }
                 $obj.addClass("zz" + setClass);
                 setTimeout(function() {
@@ -166,16 +169,68 @@
             });
 
             $wrap.hover(function() {
-                pauser();
+                if (!$wrap.hasClass("zzfullscreen") && !$wrap.hasClass("zzfullwindow")) {
+                    pauser();
+                }
             }, function() {
                 player();
             });
 
-            if(settings.hideControl && settings.hideControl.length) {
+            if (settings.hideControl && settings.hideControl.length) {
                 $.each(settings.hideControl, function(index, val) {
                     $wrap.find(".jlider_" + val).hide();
                 });
             }
+
+            var enterFS = function(e) {
+                if (e.requestFullscreen) {
+                    e.requestFullscreen();
+                } else if (e.msRequestFullscreen) {
+                    e.msRequestFullscreen();
+                } else if (e.mozRequestFullScreen) {
+                    e.mozRequestFullScreen();
+                } else if (e.webkitRequestFullScreen) {
+                    e.webkitRequestFullScreen();
+                } else {
+                    $wrap.addClass("zzfullwindow");
+                }
+            };
+
+            var exitFS = function() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                } else {
+                    $wrap.removeClass("zzfullwindow");
+                }
+            };
+
+            $full.click(function() {
+                $full.toggleClass(function() {
+                    if ($full.hasClass("jlider_exit")) {
+                        exitFS();
+                        $wrap.removeClass("zzfullscreen");
+                        return "jlider_exit";
+                    } else {
+                        enterFS($wrap[0]);
+                        $wrap.addClass("zzfullscreen");
+                        if ($play.text() == "Play") {
+                            player();
+                        }
+                        $next.add($prev).add($paging).hover(function() {
+                            pauser();
+                        }, function() {
+                            player();
+                        });
+                        return "jlider_exit";
+                    }
+                });
+            });
 
         });
     };

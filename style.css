@@ -1,3 +1,8 @@
+/* 
+ * zzSLider v0.2 by Zzbaivong <devs.forumvi.com>
+ *
+ * Forked from Jlider v1.0 by Juskteez (vhuyphong@gmail.com)
+ */
 * {
     margin: 0;
     padding: 0;
@@ -81,6 +86,7 @@ h3 {
     bottom: 0;
 }
 /* Effect scale */
+
 .jlider_list.zzscaleIn > li {
     -webkit-transform: scale(2);
     -ms-transform: scale(2);
@@ -131,15 +137,19 @@ h3 {
     transform: rotate(0deg);
 }
 .jlider_list.zzrotateX > li {
+    -webkit-transform: rotateX(180deg);
     transform: rotateX(180deg);
 }
 .jlider_list.zzrotateX > li.jactive {
+    -webkit-transform: rotateX(0deg);
     transform: rotateX(0deg);
 }
 .jlider_list.zzrotateY > li {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
 .jlider_list.zzrotateY > li.jactive {
+    -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
 }
 .jlider_list > li > img {
@@ -161,6 +171,10 @@ h3 {
 .jlider_control > div {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.3);
+    opacity: .3;
+}
+.jlider_control > div:hover {
+    opacity: 1;
 }
 .jlider_paging {
     width: 100%;
@@ -225,7 +239,15 @@ h3 {
     top: 0;
     left: 0;
 }
-.jlider_play, .jlider_next, .jlider_prev, .jlider_exit, .jlider_full {
+.jlider_control > div.jlider_full {
+    top: -40px;
+    right: -40px;
+}
+.jlider_wrap:hover div.jlider_full {
+    top: 0;
+    right: 0;
+}
+.jlider_play, .jlider_next, .jlider_prev, .jlider_full {
     cursor: pointer;
     text-indent: -9999px;
     display: block;
@@ -233,11 +255,11 @@ h3 {
     width: 40px;
     height: 40px;
 }
-.jlider_exit {
-    background-position: 0 0;
-}
 .jlider_full {
     background-position: -40px 0;
+}
+.jlider_full.jlider_exit {
+    background-position: 0 0;
 }
 .jlider_next {
     background-position: 0 -40px;
@@ -266,4 +288,24 @@ h3 {
     top: 0;
     width: 0;
     z-index: 30;
+}
+.jlider_wrap:fullscreen {
+    width: 100%!important;
+    height: 100%!important;
+}
+.jlider_wrap:-webkit-full-screen {
+    width: 100%!important;
+    height: 100%!important;
+}
+.jlider_wrap:-ms-fullscreen {
+    width: 100%!important;
+    height: 100%!important;
+}
+.jlider_wrap.zzfullwindow {
+    position: fixed;
+    width: 100%!important;
+    height: 100%!important;
+    left: 0;
+    top: 0;
+    z-index: 999;
 }
