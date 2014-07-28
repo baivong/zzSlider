@@ -2,70 +2,100 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Jlider - Images slider</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="lib.js"></script>
-    <script type="text/javascript" src="min/plugin.min.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        $(".jlider").zzSlider({
-            effect: "random", 
-            // random
-            // fade|left|right|top|bottom|scaleIn|scaleOut|skewXY|skewYX|rotateX|rotateY|rotateXY|rotateYX
-            // ["left", "right", "top", "bottom"]
-            // ["scaleIn", "scaleOut", "rotateX", "rotateY"]
-            width: 534,
-            height: 800,
-            speed: 1000
-        });
-    });
-    </script>
+	<meta charset="utf-8">
+	<title>zzSlider - Images slider</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="lib.js"></script>
+	<script type="text/javascript" src="plugin.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("#demo1").zzslider({
+				width: 300,
+				height: 200,				
+				autoPlay: false,
+				
+				onPlay: function (img) {
+					console.log("play");
+				},
+				onPause: function (img) {
+					console.log("pause");
+				},
+				onChange: function (img) {
+					console.log("change");
+				},
+				onLoaded: function (img) {
+					console.log("loaded");
+				},
+				onFullscreen: function (img) {
+					console.log("full");
+				},
+				onExitfullscreen: function (img) {
+					console.log("exit");
+				},
+				helper: function (temp, settings) {
+					console.log(this);
+					console.log(temp);
+					console.log(settings);
+				}
+			});
+			$("#demo2").zzslider({
+				effect: "left right up down",
+				// random
+				// left right up down zoomIn zoomOut skewLeft skewRight skewUp skewDown rotateLeft rotateRight
+				hideControl: "play full progress",
+				// play pause next prev paging full progress
+				width: 300,
+				height: 500,
+				speed: 1500
+			});
+		});
+	</script>
 </head>
 
 <body>
-    <h3>jlider - jQuery slider</h3>
-    <ul class="jlider">
-        <li>
-            <img src="img/1.jpg" alt="1.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/2.jpg" alt="2.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/3.jpg" alt="3.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/4.jpg" alt="4.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/5.jpg" alt="5.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/6.jpg" alt="6.jpg" title="Image" />
-        </li>
-    </ul>
-    <!-- <h3>jlider - jQuery slider</h3>
-    <ul class="jlider">
-        <li>
-            <img src="img/1.jpg" alt="1.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/2.jpg" alt="2.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/3.jpg" alt="3.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/4.jpg" alt="4.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/5.jpg" alt="5.jpg" title="Image" />
-        </li>
-        <li>
-            <img src="img/6.jpg" alt="6.jpg" title="Image" />
-        </li>
-    </ul> -->
+
+	<h3>zzSlider - jQuery slider</h3>
+	<ul class="jlider" id="demo1">
+		<li>
+			<img src="img/1.jpg" alt="1.jpg" />
+		</li>
+		<li>
+			<img src="img/2.jpg" alt="2.jpg" />
+		</li>
+		<li>
+			<img src="img/3.jpg" alt="3.jpg" />
+		</li>
+		<li>
+			<img src="img/4.jpg" alt="4.jpg" />
+		</li>
+		<li>
+			<img src="img/5.jpg" alt="5.jpg" />
+		</li>
+		<li>
+			<img src="img/6.jpg" alt="6.jpg" />
+		</li>
+	</ul>
+	<h3>zzSlider - jQuery slider</h3>
+	<ul class="jlider" id="demo2">
+		<li>
+			<img src="img/1.jpg" alt="1.jpg" />
+		</li>
+		<li>
+			<img src="img/2.jpg" alt="2.jpg" />
+		</li>
+		<li>
+			<img src="img/3.jpg" alt="3.jpg" />
+		</li>
+		<li>
+			<img src="img/4.jpg" alt="4.jpg" />
+		</li>
+		<li>
+			<img src="img/5.jpg" alt="5.jpg" />
+		</li>
+		<li>
+			<img src="img/6.jpg" alt="6.jpg" />
+		</li>
+	</ul>
 </body>
 
 </html>
