@@ -1,5 +1,5 @@
 /*
- * zzSLider v0.3 by Zzbaivong <devs.forumvi.com>
+ * zzSLider v0.4 by Zzbaivong <devs.forumvi.com>
  *
  * Forked from Jlider v1.0 by Juskteez (vhuyphong@gmail.com)
  */
@@ -16,6 +16,8 @@ h3 {
 	text-align: center;
 	padding: 10px;
 }
+
+/* zzSLider */
 .jlider_wrap {
 	width: 400px;
 	height: 300px;
@@ -90,11 +92,14 @@ h3 {
 }
 .jlider_paging {
 	left: 50%;
-	bottom: -28px;
-	height: 18px;
+	bottom: -36px;
+	height: 26px;
 	padding: 5px;
 	background: transparent!important;
 	opacity: 1!important;
+	white-space: nowrap;
+	-webkit-transition: bottom .5s;
+	transition: bottom .5s;
 }
 .jlider_paging > .zzpage {
 	float: left;
@@ -105,11 +110,12 @@ h3 {
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
-	margin: 0 3px;
+	margin: 3px;
 	padding: 3px;
 	border: 1px solid rgba(255, 255, 255, 0);
 }
-.jlider_paging > .zzpage.jactive, .jlider_paging > .zzpage:hover {
+.jlider_paging > .zzpage.jactive,
+.jlider_paging > .zzpage:hover {
 	background: #FFF;
 	border-color: #B3B3B3;
 }
@@ -121,7 +127,8 @@ h3 {
 	border-radius: 50%;
 	border: 1px solid #B3B3B3;
 }
-.zzpage.jactive > span, .zzpage:hover > span {
+.zzpage.jactive > span,
+.zzpage:hover > span {
 	border-color: #FFF;
 }
 .jlider_next,
@@ -164,7 +171,6 @@ h3 {
 	top: -40px;
 	left: -40px;
 	-webkit-transform: scale(.7);
-	-ms-transform: scale(.7);
 	transform: scale(.7);
 }
 .jlider_wrap:hover div.jlider_pause {
@@ -175,7 +181,6 @@ h3 {
 	top: -40px;
 	right: -40px;
 	-webkit-transform: scale(.7);
-	-ms-transform: scale(.7);
 	transform: scale(.7);
 }
 .jlider_wrap:hover div.jlider_full {
@@ -211,20 +216,16 @@ h3 {
 .jlider_control > div:hover {
 	background-color: rgba(0, 0, 0, 0.5);
 }
-.jlider_control > div,
-.jlider_list > li,
-.jlider_paging > .zzpage,
-.jlider_percent {
-	-webkit-transition: all 800ms;
-	transition: all 800ms;
-}
-.jlider_control > div,
-.jlider_paging > .zzpage {
-	-webkit-transition: .7s;
-	transition: all .7s;
-}
-/* Percent */
 
+/* Animate */
+.jlider_control > div:not(.jlider_paging),
+.jlider_list > li,
+.jlider_paging > .zzpage {
+	-webkit-transition: all .8s;
+	transition: all .8s;
+}
+
+/* Percent */
 .jlider_percent {
 	position: absolute;
 	left: 50%;
@@ -243,13 +244,16 @@ h3 {
 }
 .jlider_percent.zz100 {
 	-webkit-transform: scale(3);
-	-ms-transform: scale(3);
 	transform: scale(3);
 	opacity: 0;
 }
-/* Fullscreen */
 
-.jlider_wrap:-webkit-full-screen {
+/* Fullscreen */
+.jlider_wrap:fullscreen {
+	width: 100%!important;
+	height: 100%!important;
+}
+.jlider_wrap:-ms-fullscreen {
 	width: 100%!important;
 	height: 100%!important;
 }
@@ -257,19 +261,7 @@ h3 {
 	width: 100%!important;
 	height: 100%!important;
 }
-.jlider_wrap:-ms-fullscreen {
-	width: 100%!important;
-	height: 100%!important;
-}
-.jlider_wrap:fullscreen {
-	width: 100%!important;
-	height: 100%!important;
-}
 .jlider_wrap:-webkit-full-screen {
-	width: 100%!important;
-	height: 100%!important;
-}
-.jlider_wrap:-ms-fullscreen {
 	width: 100%!important;
 	height: 100%!important;
 }
@@ -284,15 +276,6 @@ h3 {
 .jlider_wrap.zzfullwindow .jlider_full {
 	background-position: 0 0;
 }
-.jlider_wrap:-webkit-full-screen .jlider_full {
-	background-position: 0 0;
-}
-.jlider_wrap:-moz-full-screen .jlider_full {
-	background-position: 0 0;
-}
-.jlider_wrap:-ms-fullscreen .jlider_full {
-	background-position: 0 0;
-}
 .jlider_wrap:fullscreen .jlider_full {
 	background-position: 0 0;
 }
@@ -305,8 +288,8 @@ h3 {
 .jlider_wrap:-moz-full-screen .jlider_full {
 	background-position: 0 0;
 }
-/* Effect */
 
+/* Effect */
 .jlider_list.zzleft > li {
 	-webkit-transform: rotateY(-180deg) scale(.7) translate(130%, 0) perspective(300px);
 	transform: rotateY(-180deg) scale(.7) translate(130%, 0) perspective(300px);
@@ -325,12 +308,10 @@ h3 {
 }
 .jlider_list.zzzoomIn > li {
 	-webkit-transform: scale(3);
-	-ms-transform: scale(3);
 	transform: scale(3);
 }
 .jlider_list.zzzoomOut > li {
 	-webkit-transform: scale(-1);
-	-ms-transform: scale(-1);
 	transform: scale(-1);
 }
 .jlider_list.zzskewLeft > li {
@@ -351,12 +332,10 @@ h3 {
 }
 .jlider_list.zzrotateLeft > li {
 	-webkit-transform: rotate(180deg) scale(.5);
-	-ms-transform: rotate(180deg) scale(.5);
 	transform: rotate(180deg) scale(.5);
 }
 .jlider_list.zzrotateRight > li {
 	-webkit-transform: rotate(360deg) scale(.5);
-	-ms-transform: rotate(360deg) scale(.5);
 	transform: rotate(360deg) scale(.5);
 }
 .jlider_list > li.jactive {

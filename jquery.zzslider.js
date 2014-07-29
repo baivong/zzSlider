@@ -1,5 +1,5 @@
 /*!
- * zzSLider v0.3 by Zzbaivong <http://devs.forumvi.com>
+ * zzSLider v0.4 by Zzbaivong <http://devs.forumvi.com>
  *
  * Forked from Jlider v1.0 by Juskteez (vhuyphong@gmail.com)
  */
@@ -24,7 +24,7 @@
 			height: 400,
 			maxWidth: "100%",
 			maxHeight: "100%",
-			minWidth: 300,
+			minWidth: 200,
 			minHeight: 200,
 
 			/**
@@ -118,7 +118,7 @@
 			var $item = $("li", $obj);
 			var itemLength = $item.length;
 			var $number;
-			
+
 			/**
 			 * Áp dụng hiệu ứng bằng cách thay class lên ảnh
 			 * @param {number} Số index của ảnh cần hiển thị
@@ -170,7 +170,7 @@
 
 				$progress.animate({
 					height: (100 - percent) + "%" // Giảm dần chiều cao thanh progress
-				}, 50, "linear", function () {
+				}, 70, "linear", function () {
 
 					translate(num); // Hiển thị ảnh vừa tải xong
 
@@ -203,7 +203,7 @@
 							$precent.remove(); // Xóa số %
 
 							translate(0); // Hiển thị ảnh đầu tiên
-							
+
 							$paging.css("bottom", 0); // Hiển thị thanh paging
 
 							// Hàm chạy khi tất cả ảnh đã tải xong
@@ -238,9 +238,46 @@
 			});
 
 			$number = $(".zzpage", $paging); // Đặt biến cho số thứ tự ảnh vừa tạo
-			
+
 			// Căn giữa thanh paging
-			$paging.css("marginLeft", "-" + ($paging.outerWidth(true) / 2) + "px");
+			var wrapWidth = $wrap.width();
+			var pagingWidth = itemLength * $number.outerWidth(true);
+			var halfPaging = pagingWidth / 2;
+			$paging.css({
+				width: pagingWidth,
+				marginLeft: (-halfPaging) + "px"
+			});
+
+			if (pagingWidth > wrapWidth) { // Nếu thanh paging dài hơn chiều rộng slide
+				pagingWidth = pagingWidth + 100; // Thêm vào khoảng đệm 100px
+				halfPaging = pagingWidth / 2; // Tính lại vị trí căn giữa
+				$paging.css({
+					marginLeft: (-halfPaging) + "px",
+					paddingLeft: 50,
+					paddingRight: 50
+				});
+
+				var outHide = halfPaging - wrapWidth / 2; // Phần paging ẩn, nằm ngoài slide				
+				var firstOff, wrapOff;
+
+				$paging.hover(function (event) {
+					firstOff = event.pageX; // Tọa độ X của điểm rê chuột vào đầu tiên, dùng làm điểm mốc
+					wrapOff = firstOff - $wrap.offset().left; // Khoảng cách từ điểm rê chuột đầu tiên đến mép trái slide
+				}, function () {
+					$paging.animate({
+						marginLeft: (-halfPaging) + "px"
+					}, 100); // Trả lại vị trí ban đầu
+				}).mousemove(function (event) {
+					if ($paging.width() > $wrap.width()) { // Kiểm tra do thay đổi kích thước ở chế độ toàn màn hình
+						var goto = firstOff - event.pageX; // tọa độ X của chuột di chuyển tính từ điểm mốc
+						if (goto > 0) { // rê chuột về bên trái
+							$paging.css("marginLeft", (-(halfPaging - (goto * outHide / wrapOff))) + "px");
+						} else if (goto < 0) { // rê chuột về bên phải
+							$paging.css("marginLeft", (-halfPaging + (goto * outHide / (wrapWidth - wrapOff))) + "px");
+						}
+					}
+				});
+			}
 
 			/**
 			 * Tìm số index của ảnh phía trước hoặc sau
