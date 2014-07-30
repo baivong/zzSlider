@@ -257,7 +257,7 @@
 					paddingRight: 50
 				});
 
-				var outHide = halfPaging - wrapWidth / 2; // Phần paging ẩn, nằm ngoài slide				
+				var outHide = halfPaging - wrapWidth / 2; // Phần paging ẩn, nằm ngoài slide
 				var firstOff, wrapOff;
 
 				$paging.hover(function (event) {
@@ -413,18 +413,16 @@
 				}
 			});
 
-			settings.helper.call($wrap, {
-				temp: {
-					control: {
-						play: $play,
-						full: $full,
-						next: $next,
-						prev: $prev,
-						paging: $number
-					},
-					progress: $progress,
-					list: $item
-				}
+			settings.helper.call($wrap[0], {
+				control: {
+					play: $play,
+					full: $full,
+					next: $next,
+					prev: $prev,
+					paging: $number
+				},
+				progress: $progress,
+				list: $item
 			}, settings);
 
 		});
