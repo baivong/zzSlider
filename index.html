@@ -1,1 +1,121 @@
-zzSlider demo page
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>zzSlider - Images slider</title>
+	<link rel="stylesheet" type="text/css" href="jquery.zzslider.css" />
+	<script type="text/javascript" src="lib.js"></script>
+	<script type="text/javascript" src="jquery.zzslider.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("#demo1").zzslider({
+				width: 400,
+				height: 400,
+				speed: 1500,
+				effect: "left right up down",
+
+				onPlay: function (img) {
+					console.log("play");
+				},
+				onPause: function (img) {
+					console.log("pause");
+				},
+				onChange: function (img) {
+					console.log("change");
+				},
+				onLoaded: function (img) {
+					console.log("loaded");
+				},
+				onFullscreen: function (img) {
+					console.log("full");
+				},
+				onExitfullscreen: function (img) {
+					console.log("exit");
+				},
+				helper: function (temp, settings) {
+					console.log(this);
+					console.log(temp.list);
+					console.log(settings);					
+				}
+			});
+			$("#demo2").zzslider({
+				width: 270,
+				height: 404,				
+				hideControl: "play full progress",				
+				autoPlay: false
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+	 <h3>zzSlider - jQuery slider</h3>
+	<ul class="jlider" id="demo1">
+		<li>
+			<img src="img/1.jpg" alt="1.jpg" />
+		</li>
+		<li>
+			<img src="img/2.jpg" alt="2.jpg" />
+		</li>
+		<li>
+			<img src="img/3.jpg" alt="3.jpg" />
+		</li>
+		<li>
+			<img src="img/4.jpg" alt="4.jpg" />
+		</li>
+		<li>
+			<img src="img/5.jpg" alt="5.jpg" />
+		</li>
+		<li>
+			<img src="img/6.jpg" alt="6.jpg" />
+		</li>
+	</ul> 
+	<h3>zzSlider - jQuery slider</h3>	
+	<ul id="demo2" class="jlider">
+		<li>
+			<img src="img/1.jpg" alt="1.jpg">
+		</li>
+		<li>
+			<img src="img/2.jpg" alt="2.jpg">
+		</li>
+		<li>
+			<img src="img/3.jpg" alt="3.jpg">
+		</li>
+		<li>
+			<img src="img/4.jpg" alt="4.jpg">
+		</li>
+		<li>
+			<img src="img/5.jpg" alt="5.jpg">
+		</li>
+		<li>
+			<img src="img/6.jpg" alt="6.jpg">
+		</li>
+		<li>
+			<img src="img/7.jpg" alt="7.jpg">
+		</li>
+		<li>
+			<img src="img/8.jpg" alt="8.jpg">
+		</li>
+		<li>
+			<img src="img/9.jpg" alt="9.jpg">
+		</li>
+		<li>
+			<img src="img/10.jpg" alt="10.jpg">
+		</li>
+		<li>
+			<img src="img/11.jpg" alt="11.jpg">
+		</li>
+		<li>
+			<img src="img/12.jpg" alt="12.jpg">
+		</li>
+		<li>
+			<img src="img/13.jpg" alt="13.jpg">
+		</li>
+	</ul>
+
+</body>
+
+</html>
